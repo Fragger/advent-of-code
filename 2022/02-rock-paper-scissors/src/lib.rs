@@ -1,6 +1,6 @@
-use std::path::PathBuf;
-use std::io::{BufRead, BufReader};
 use std::error::Error;
+use std::io::{BufRead, BufReader};
+use std::path::PathBuf;
 
 #[derive(Eq, PartialEq, Clone, Copy)]
 enum Shape {
@@ -47,8 +47,12 @@ impl Round {
     }
     fn outcome(&self) -> Outcome {
         //if (self.opponent as u8 + 1) % 3 == self.selection as u8 { return Outcome::Win }
-        if self.opponent.win() == self.selection { return Outcome::Win }
-        if self.opponent == self.selection { return Outcome::Draw }
+        if self.opponent.win() == self.selection {
+            return Outcome::Win;
+        }
+        if self.opponent == self.selection {
+            return Outcome::Draw;
+        }
         Outcome::Lost
     }
     fn score(&self) -> u8 {
@@ -60,7 +64,7 @@ pub fn get_total(rounds: Vec<Round>) -> u32 {
     rounds.iter().map(|r| r.score() as u32).sum()
 }
 
-pub fn get_rounds(input: PathBuf) -> Result<(Vec<Round>, Vec<Round>), Box<dyn Error>> { 
+pub fn get_rounds(input: PathBuf) -> Result<(Vec<Round>, Vec<Round>), Box<dyn Error>> {
     let file = std::fs::File::open(input)?;
     let reader = BufReader::new(file);
 
@@ -98,7 +102,7 @@ pub fn get_rounds(input: PathBuf) -> Result<(Vec<Round>, Vec<Round>), Box<dyn Er
 }
 
 #[cfg(test)]
-mod tests{
+mod tests {
     use super::*;
 
     #[test]

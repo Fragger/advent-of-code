@@ -1,6 +1,6 @@
-use std::path::PathBuf;
-use std::io::{BufRead, BufReader};
 use std::error::Error;
+use std::io::{BufRead, BufReader};
+use std::path::PathBuf;
 
 pub fn get_totals(input: PathBuf) -> Result<Vec<u32>, Box<dyn Error>> {
     let file = std::fs::File::open(input)?;
@@ -33,7 +33,7 @@ pub fn get_topn_sum(mut totals: Vec<u32>, n: usize) -> u32 {
 }
 
 #[cfg(test)]
-mod tests{
+mod tests {
     use super::*;
 
     fn example() -> Vec<u32> {

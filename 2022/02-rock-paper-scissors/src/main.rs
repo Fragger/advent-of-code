@@ -5,9 +5,9 @@ use std::process;
 /// Calculate total score from following strategy guide file
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
-struct Args{
+struct Args {
     /// The file to use as input
-    input: PathBuf
+    input: PathBuf,
 }
 
 fn main() {
