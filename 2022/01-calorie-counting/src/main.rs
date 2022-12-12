@@ -24,4 +24,3 @@ fn main() {
     let top_3_sum = calorie_counting::get_topn_sum(totals, 3);
     println!("Sum of Calories from top 3 Elves {top_3_sum}");
 }
-
