@@ -3,6 +3,8 @@ export TZ=EST
 [ "$(date +%m)" -eq 12 ] || exit
 cd "$(dirname "$0")" || exit
 
+. .env
+
 # Usage:
 #  $ ./get_input [day]
 # * day: day to fetch (default: today in EST)
@@ -13,9 +15,8 @@ cd "$(dirname "$0")" || exit
 # Finding SESSION with Chrome (get value of adeventofcode.com session cookie)
 # 1. Go to any https://adventofcode.com page while signed in
 # 2. F12 -> Application -> Storage -> Cookies -> https://adventofcode.com
-# 3. Copy value of 'session' cookie and paste below
-
-SESSION="session_Cookie_value_HERE"
+# 3. Copy value of 'session' cookie
+# 4. Create .env in this directory containing: SESSION="session_Cookie_value_HERE"
 
 #https://www.reddit.com/r/adventofcode/comments/z9dhtd/please_include_your_contact_info_in_the_useragent/
 ua="https://github.com/Fragger/advent-of-code/blob/master/2023/input/get_input by wonderfulweb@gmail.com"
