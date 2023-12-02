@@ -10,7 +10,7 @@ with open('../input/02', 'r') as f:
         possible = True
         for cubeset in cubes.split(';'):
             for cube in cubeset.split(','):
-                count, color = cube.strip().split(' ')
+                count, color = cube.split()
                 count = int(count)
                 match color:
                     case 'red':
