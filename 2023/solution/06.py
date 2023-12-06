@@ -1,7 +1,7 @@
 import sys
 
 with open(sys.argv[1] if len(sys.argv) > 1 else '../input/06') as f:
-    times, distances = (list(map(int, line.split()[1:])) for line in f)
+    times, distances = (map(int, line.split()[1:]) for line in f)
 
 p1 = 1
 p2time = ''
@@ -16,7 +16,7 @@ for time, distance in zip(times, distances):
     #  -buttontime^2 + time * buttontime - distance = 0
     # a*x^2 + b*x + c = 0
     #  x = (-b +/- sqrt(b^2-4ac))/2a 
-    # a = -1, b = time, c = distance
+    # a = -1, b = time, c = -distance
 
     discriminant = (time**2-4*distance)**0.5
     start = (-time + discriminant)//-2 + 1 # floor + 1
