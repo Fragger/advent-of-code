@@ -1,7 +1,8 @@
+import sys
 
 digits = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'] 
 
-with open('../input/01', 'r') as f:
+with open(sys.argv[1] if len(sys.argv) > 1 else '../input/01') as f:
     p1sum = 0
     p2sum = 0
     for line in f:

@@ -1,7 +1,8 @@
+import sys
 
 p1sum = 0
 p2sum = 0
-with open('../input/02', 'r') as f:
+with open(sys.argv[1] if len(sys.argv) > 1 else '../input/02') as f:
     for line in f:
         gameid, cubes = line.split(':') 
         red = 0
