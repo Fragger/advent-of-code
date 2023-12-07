@@ -15,9 +15,8 @@ def p2key(hand):
 
     cards = Counter(cards)
     j = cards.pop('J',0) if cards['J']<5 else 0
-    score = [count[1] for count in cards.most_common()]
-    score[0] += j
-    score = scores.index(tuple(score))
+    cards.update(cards.most_common(1)[0][0]*j)
+    score = scores.index(tuple(count[1] for count in cards.most_common()))
 
     return (score, order)
 
