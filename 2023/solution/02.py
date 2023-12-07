@@ -33,5 +33,5 @@ with open(sys.argv[1] if len(sys.argv) > 1 else '../input/02') as f:
             p1sum += int(gameid[5:])
         p2sum += red*green*blue
 
-    print(f'{p1sum=}')
-    print(f'{p2sum=}')
+print(p1sum)
+print(p2sum)

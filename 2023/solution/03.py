@@ -27,10 +27,10 @@ with open(sys.argv[1] if len(sys.argv) > 1 else '../input/03') as f:
             else:
                 j += 1
 
-print(f'{p1sum=}')
+print(p1sum)
 
 p2sum = 0
 for stars in p2stars.values():
     if len(stars) == 2:
         p2sum += stars[0] * stars[1]
-print(f'{p2sum=}')
+print(p2sum)
