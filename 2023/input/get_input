@@ -22,10 +22,10 @@ cd "$(dirname "$0")" || exit
 ua="https://github.com/Fragger/advent-of-code/blob/master/2023/input/get_input by wonderfulweb@gmail.com"
 
 year=$(date +%Y)
-day=${1:-$(date +%d)}
-printf -v day %d "$day"
+day=$((10#${1:-$(date +%d)}))
 printf -v padDay %02d "$day"
 
 if ! [ -f "$padDay" ]; then
 	curl "https://adventofcode.com/$year/day/$day/input" --cookie "session=$SESSION" -A "$ua" -o "$padDay"
 fi
+head "$padDay"
