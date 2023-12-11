@@ -5,6 +5,8 @@ cd "$(dirname "$0")" || exit
 
 . .env
 
+if [[ ! -v SESSION ]]; then echo "Create .env with SESSION"; exit; fi;
+
 # Usage:
 #  $ ./get_input [day]
 # * day: day to fetch (default: today in EST)
