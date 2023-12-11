@@ -33,28 +33,28 @@ pipes = {
         'F': [south, east],
         }
 
+tiles_xy = lambda x, y: tiles[y][x]
+
 for d in north, south, east, west:
-    x, y = loop[0]+d
-    if tiles[y][x] in pipes and -d in pipes[tiles[y][x]]:
-        loop.append(xy(x, y))
+    loc = loop[0]+d
+    if tiles_xy(*loc) in pipes and -d in pipes[tiles_xy(*loc)]:
         break
 
-while loop[-1] != loop[0]:
-    x, y = loop[-1] 
-    prev = pipes[tiles[y][x]].index(loop[-2]-loop[-1])
-    loc = pipes[tiles[y][x]][1-prev]
-    loop.append(loop[-1]+loc)
+while loc != loop[0]:
+    loop.append(loc)
+    prev = pipes[tiles_xy(*loc)].index(loop[-2]-loc)
+    loc += pipes[tiles_xy(*loc)][1-prev]
 
 print(len(loop)//2)
 
-pipes['S'] = [loop[1]-loop[0], loop[-2]-loop[-1]]
+pipes['S'] = [loop[1]-loop[0], loop[-1]-loop[0]]
 loop_set = set(loop)
 p2count = 0
 for y in range(1, len(tiles)-1):
     cross_count = 0
     for x in range(len(tiles[y])-1):
         if (x, y) in loop_set:
-            cross_count += north in pipes[tiles[y][x]]
+            cross_count += north in pipes[tiles_xy(x, y)]
         else:
             p2count += cross_count%2
 
