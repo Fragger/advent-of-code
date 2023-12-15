@@ -3,42 +3,27 @@ from functools import cache
 
 @cache
 def arrange(records, sizes, damaged = 0):
-    match records[:1], damaged:
-        case '', 0:
-            if not sizes:
-                # consumed all sizes and no current damaged count
-                return 1
-        case '', _:
-            if len(sizes) == 1 and sizes[0] == damaged:
-                # one size left and it equals the damaged count we have
-                return 1
-        case '?', 0:
-            return (arrange(records[1:], sizes) + 
-                    # count as .
-                    arrange(records[1:], sizes, damaged + 1))
-                    #count as #
-        case '?', _:
-            if sizes:
-                if sizes[0] == damaged:
-                    return arrange(records[1:], sizes[1:])
-                    # count as . consume one size since we had the correct count of # 
-                    # can't count as #
-                else:
-                    return arrange(records[1:], sizes, damaged + 1)
-                    # count as # can't count as .
-        case '#', _:
-            if sizes and sizes[0] != damaged:
-                return arrange(records[1:], sizes, damaged + 1)
-                # still have more damaged to count on current size
-        case '.', 0:
-            return arrange(records[1:], sizes)
+    if not records:
+        if not sizes:
+            # consumed all sizes
+            return 1
+        elif len(sizes) == 1 and sizes[0] == damaged:
+            # one size left and it equals the damaged count we have
+            return 1
+        else:
+            return 0
+    ans = 0
+    if records[0] in '.?':
+        if damaged == 0:
             # next record
-        case '.', _:
-            if sizes and sizes[0] == damaged:
-                return arrange(records[1:], sizes[1:]) 
-                # consume one size since we had the correct count of #
-
-    return 0
+            ans += arrange(records[1:], sizes)
+        elif sizes[0] == damaged:
+            # consume one size since we had the correct count of #
+            ans += arrange(records[1:], sizes[1:])
+    if records[0] in '#?' and sizes and sizes[0] != damaged:
+        # still have more damaged to count on current size
+        ans += arrange(records[1:], sizes, damaged + 1)
+    return ans
 
 p1sum = 0
 p2sum = 0
