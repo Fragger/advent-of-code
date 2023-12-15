@@ -1,29 +1,31 @@
 import sys
 from functools import cache
 
-@cache
-def arrange(records, sizes, damaged = 0):
-    if not records:
-        if not sizes:
-            # consumed all sizes
-            return 1
-        elif len(sizes) == 1 and sizes[0] == damaged:
-            # one size left and it equals the damaged count we have
-            return 1
-        else:
-            return 0
-    ans = 0
-    if records[0] in '.?':
-        if damaged == 0:
-            # next record
-            ans += arrange(records[1:], sizes)
-        elif sizes[0] == damaged:
-            # consume one size since we had the correct count of #
-            ans += arrange(records[1:], sizes[1:])
-    if records[0] in '#?' and sizes and sizes[0] != damaged:
-        # still have more damaged to count on current size
-        ans += arrange(records[1:], sizes, damaged + 1)
-    return ans
+def arrange(records, sizes):
+    @cache
+    def _arrange(record, size, damaged = 0):
+        if record == len(records):
+            if size == len(sizes):
+                # consumed all sizes
+                return 1
+            elif size + 1 == len(sizes) and sizes[size] == damaged:
+                # one size left and it equals the damaged count we have
+                return 1
+            else:
+                return 0
+        ans = 0
+        if records[record] in '.?':
+            if damaged == 0:
+                # next record
+                ans += _arrange(record + 1, size)
+            elif sizes[size] == damaged:
+                # consume one size since we had the correct count of #
+                ans += _arrange(record + 1, size + 1)
+        if records[record] in '#?' and size < len(sizes) and sizes[size] != damaged:
+            # still have more damaged to count on current size
+            ans += _arrange(record + 1, size, damaged + 1)
+        return ans
+    return _arrange(0, 0)
 
 p1sum = 0
 p2sum = 0
