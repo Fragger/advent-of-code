@@ -40,11 +40,7 @@ for part in parts.splitlines():
         p1sum += sum(xmas.values())
 print(p1sum)
 
-ranges = [('in', {'x': range(1, 4001),
-                  'm': range(1, 4001),
-                  'a': range(1, 4001),
-                  's': range(1, 4001)})]
-
+ranges = [('in', {cat: range(1, 4001) for cat in 'xmas'})]
 p2comb = 0
 while ranges:
     workflow, xmas = ranges.pop()
