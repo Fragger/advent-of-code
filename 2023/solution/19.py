@@ -64,12 +64,12 @@ while ranges:
             if xmas[rule.cat].start > rule.val:
                 ranges.append((rule.dest, xmas))
                 break
-            if xmas[rule.cat].stop > rule.val:
+            if xmas[rule.cat].stop > rule.val+1:
                 ranges.append((rule.dest,
                     xmas | {rule.cat: range(rule.val+1, xmas[rule.cat].stop)}))
                 xmas[rule.cat] = range(xmas[rule.cat].start, rule.val+1)
         elif rule.op == '<':
-            if xmas[rule.cat].stop < rule.val:
+            if xmas[rule.cat].stop <= rule.val:
                 ranges.append((rule.dest, xmas))
                 break
             if xmas[rule.cat].start < rule.val:
