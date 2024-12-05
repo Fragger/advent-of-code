@@ -10,16 +10,11 @@ for rule in po.splitlines():
     first, second = rule.split('|')
     rules[first].add(second)
 
-def cmp_rules(a, b):
-    if b not in rules[a]:
-        return 1
-    return -1
-
 p1 = 0
 p2 = 0
 for update in updates.splitlines():
     pages = update.split(',')
-    sortedpages = sorted(pages, key=cmp_to_key(cmp_rules))
+    sortedpages = sorted(pages, key=cmp_to_key(lambda a, b: 1 if b not in rules[a] else -1))
     if sortedpages == pages:
         p1 += int(pages[len(pages)//2])
     else:
