@@ -15,21 +15,20 @@ dirs = ((0, -1), (1, 0), (0, 1), (-1, 0))
 
 orent = 0
 start = loc
-visited1 = {start}
+visited = {start}
 while 0 < loc[0] < xlen-1 and 0 < loc[1] < ylen-1:
     x, y = loc[0]+dirs[orent][0], loc[1]+dirs[orent][1]
     if labmap[y][x] == '#':
         orent = (orent+1)%4
     else:
         loc = x, y
-        visited1.add(loc)
-print(len(visited1))
+        visited.add(loc)
+print(len(visited))
 
-p2 = 0
-for block in visited1:
+def loop(block):
     orent = 0
     loc = start
-    visited2 = {start+(orent,)}
+    visited = {start+(orent,)}
     while 0 < loc[0] < xlen-1 and 0 < loc[1] < ylen-1:
         x, y = loc[0]+dirs[orent][0], loc[1]+dirs[orent][1]
         if labmap[y][x] == '#' or (x, y) == block:
@@ -37,8 +36,8 @@ for block in visited1:
         else:
             loc = x, y
             visit = x, y, orent
-            if visit in visited2:
-                p2 += 1
-                break
-            visited2.add(visit)
-print(p2)
+            if visit in visited:
+                return True
+            visited.add(visit)
+    return False
+print(sum(map(loop, visited)))
