@@ -25,11 +25,5 @@ for ant in ants.values():
                 p1.add((nx, ny))
             p2.add((nx, ny))
             i += 1
-        i = 1
-        while 0 <= (nx:=bx+dx*i) < xlen and 0 <= (ny:=by+dy*i) < ylen:
-            if i == 1:
-                p1.add((nx, ny))
-            p2.add((nx, ny))
-            i += 1
 print(len(p1))
 print(len(p2))
