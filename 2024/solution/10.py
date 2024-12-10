@@ -5,7 +5,7 @@ with open(sys.argv[1] if len(sys.argv) > 1 else '../input/10') as f:
     topo = {(x, y): int(h) for y, line in enumerate(f.read().splitlines()) for x, h in enumerate(line)}
 
 def step(ans, h, x, y):
-    if (x, y) in topo and h == topo[x, y]:
+    if topo.get((x, y)) == h:
         if h == 9:
             ans[x, y] += 1
         else:
