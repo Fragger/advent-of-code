@@ -5,8 +5,8 @@ def calc(ax, ay, bx, by, prizex, prizey):
     #ay*i+by*j=prizey
     det = ax*by-bx*ay
 
-    i = round((by*prizex-bx*prizey)/det)
-    j = round((-ay*prizex+ax*prizey)/det)
+    i = (by*prizex-bx*prizey)//det
+    j = (-ay*prizex+ax*prizey)//det
 
     if ax*i+bx*j == prizex and ay*i+by*j == prizey:
         return i*3+j
