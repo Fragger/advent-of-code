@@ -29,15 +29,7 @@ def get_presses(sequence, depth=2, dirkey=False, cur=None):
     px, py = keypad[sequence[0]]
     dx, dy = px-cx, py-cy
 
-    buttons = ''
-    if dx > 0:
-        buttons += '>'*dx
-    elif dx < 0:
-        buttons += '<'*-dx
-    if dy > 0:
-        buttons += 'v'*dy
-    elif dy < 0:
-        buttons += '^'*-dy
+    buttons = '>'*dx + '<'*-dx + 'v'*dy + '^'*-dy
 
     if depth:
         perm_lens = []
