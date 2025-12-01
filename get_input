@@ -1,5 +1,5 @@
 #!/bin/bash
-export TZ=EST
+export TZ="America/New_York"
 [ "$(date +%m)" -eq 12 ] || exit
 cd "$(dirname "$0")" || exit
 
