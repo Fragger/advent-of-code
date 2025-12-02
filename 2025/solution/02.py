@@ -3,7 +3,8 @@ import sys
 p1 = 0
 p2 = 0
 with open(sys.argv[1] if len(sys.argv) > 1 else "../input/02") as f:
-    for first, last in (idrange.split("-") for idrange in f.read().split(",")):
+    for idrange in f.read().split(","):
+        first, last = idrange.split("-")
         for num in range(int(first), int(last) + 1):
             snum = str(num)
             num_len = len(snum)
