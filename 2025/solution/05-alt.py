@@ -23,6 +23,6 @@ for fresh_range in fresh_ranges:
     if current < fresh_range.stop:
         p2 += fresh_range.stop - current
         current = fresh_range.stop
-    
+
 print(p1)
 print(p2)
