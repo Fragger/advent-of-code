@@ -22,12 +22,12 @@ xlen = len(grid[0])
 p2_prob = [
     group.splitlines()
     for group in "\n".join(
-        "".join(grid[y][x] for y in range(ylen)).lstrip() for x in reversed(range(xlen))
+        "".join(grid[y][x] for y in range(ylen)).lstrip() for x in range(xlen)
     ).split("\n\n")
 ]
 
 p2 = sum(
-    reduce(opr[group[-1][-1]], (int(group[y][:-1]) for y in range(len(group))))
+    reduce(opr[group[0][-1]], (int(group[y][:-1]) for y in range(len(group))))
     for group in p2_prob
 )
 
