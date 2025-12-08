@@ -12,24 +12,14 @@ connections = sorted(combinations(boxes, 2), key=lambda conn: dist(*conn))
 
 circuits = []
 for conn_count, (a, b) in enumerate(connections, 1):
-    a_circuit = None
-    b_circuit = None
-    for i, circuit in enumerate(circuits):
-        if a in circuit:
-            a_circuit = i
-        if b in circuit:
-            b_circuit = i
-
-    if a_circuit is None and b_circuit is None:
-        circuits.append(set((a, b)))
-    elif a_circuit != b_circuit:
-        if a_circuit is None:
-            circuits[b_circuit].add(a)
-        elif b_circuit is None:
-            circuits[a_circuit].add(b)
+    new_circuits = [{a, b}]
+    for circuit in circuits:
+        if not circuit.isdisjoint(new_circuits[0]):
+            new_circuits[0].update(circuit)
         else:
-            circuits[a_circuit].update(circuits[b_circuit])
-            del circuits[b_circuit]
+            new_circuits.append(circuit)
+
+    circuits = new_circuits
 
     if conn_count == 1000:
         circuits.sort(reverse=True, key=len)
