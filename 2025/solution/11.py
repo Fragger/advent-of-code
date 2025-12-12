@@ -14,7 +14,7 @@ def trace(dev, *visit):
 
 with open(sys.argv[1] if len(sys.argv) > 1 else "../input/11") as f:
     for line in f:
-        dev, outs = line.split(": ")
+        dev, outs = line.split(":")
         cables[dev] = outs.split()
 
 print(trace("you"))
