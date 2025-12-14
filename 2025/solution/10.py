@@ -10,16 +10,14 @@ with open(sys.argv[1] if len(sys.argv) > 1 else "../input/10") as f:
     for line in f:
         lights, *buttons, joltages = [item[1:-1] for item in line.split()]
         lights = tuple(light == "#" for light in lights)
-        buttons = tuple(set(map(int, button.split(","))) for button in buttons)
+        buttons = [set(map(int, button.split(","))) for button in buttons]
         joltages = tuple(map(int, joltages.split(",")))
+        buttons = [tuple(c in b for c in range(len(joltages))) for b in buttons]
 
         parity = defaultdict(list)
         for count in range(len(buttons) + 1):
             for presses in combinations(buttons, count):
-                result = tuple(
-                    len([1 for button in presses if i in button])
-                    for i in range(len(joltages))
-                )
+                result = tuple(map(sum, zip((0,) * len(joltages), *presses)))
                 parity[tuple(counter % 2 for counter in result)].append((count, result))
 
         p1 += min(count for count, _ in parity[lights])
